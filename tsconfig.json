@@ -1,20 +1,22 @@
+// 它指定了用来编译这个项目的跟文件和编译选项。命令行：tsc
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "strict": true,
-    "jsx": "preserve",
-    "importHelpers": true,
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "skipLibCheck": true,
+    "target": "esnext", //指定ECMAScript目标版本
+    "module": "esnext", //指定生成哪个模块系统代码
+    "strict": true, //启动所有严格类型检查选项，vue推荐
+    "strictPropertyInitialization":false, //关闭严格模式下属性初始化规范写法
+    "jsx": "preserve", //在 .tsx文件里支持JSX
+    "importHelpers": true, //从 tslib 导入辅助工具函数
+    "moduleResolution": "node", //决定用node处理模块
+    "experimentalDecorators": true, //启用实验性的es装饰器
+    "skipLibCheck": true, //不忽略所有的声明文件（ *.d.ts）的类型检查。
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "baseUrl": ".",
+    "allowSyntheticDefaultImports": true, //允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查。
+    "sourceMap": false, //生成相应的.map文件
+    "baseUrl": ".", //解析非相对模块名的基准目录,所有非相对模块导入都会被当做相对于 baseUrl
     "types": [
       "webpack-env"
-    ],
+    ],//要包含的类型声明文件名列表
     "paths": {
       "@/*": [
         "src/*"
@@ -25,7 +27,7 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ] //编译过程中需要引入的库文件的列表。
   },
   "include": [
     "src/**/*.ts",
