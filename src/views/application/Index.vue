@@ -1,22 +1,23 @@
 <template>
-  <div class="home">
-    <van-nav-bar title="信息">
+  <div class="application">
+    <van-nav-bar>
+      <template #left>
+        <van-icon name="arrow-left" size="24" @click="historyBack" />
+        <van-cell title="应用号" />
+      </template>
       <template #right>
-        <router-link :to="{ name: 'createMsg' }">
-          <van-icon name="plus" size="18" />
-        </router-link>
         <van-popover v-model:show="showPopover" placement="bottom-end">
           <div class="van-popover__action">
-            <div class="van-popover__action-text">批量操作</div>
+            <router-link class="van-popover__action-text" :to="{ name: 'applicationLocal' }">本地应用号</router-link>
           </div>
           <div class="van-popover__action">
-            <router-link class="van-popover__action-text" :to="{ name: 'favor' }">收藏</router-link>
+            <div class="van-popover__action-text">扫一扫</div>
           </div>
           <div class="van-popover__action">
-            <router-link class="van-popover__action-text" :to="{ name: 'itcpIdx' }">拦截信息</router-link>
+            <router-link class="van-popover__action-text" :to="{ name: 'applicationNearby' }">附近应用号</router-link>
           </div>
           <div class="van-popover__action">
-            <router-link class="van-popover__action-text" :to="{ name: 'settingInfo' }">信息设置</router-link>
+            <router-link class="van-popover__action-text" :to="{ name: 'applicationBlackList' }">黑名单</router-link>
           </div>
           <template #reference>
             <van-icon class="icon-ellipsis-transform" name="ellipsis" size="18" />
@@ -26,9 +27,7 @@
     </van-nav-bar>
     <van-search v-model="searchVal" placeholder="请输入搜索关键词" />
     <van-list>
-      <van-cell title="应用号" is-link :to="{name: 'application'}" />
-      <van-cell title="通知类消息" is-link :to="{name: 'notice'}" />
-      <van-cell v-for="item in list" :key="item" :title="item.name" :value="item.time" :label="item.desc" is-link :to="{ name: 'viewMsg', params: { userId: item.name } }" />
+      <van-cell v-for="item in list" :key="item" :title="item.name" :value="item.time" :label="item.desc" is-link :to="{ name: 'viewSession', params: { userId: item.name } }" />
     </van-list>
   </div>
 </template>
@@ -47,9 +46,10 @@ import { NavBar, Icon, Search, Popover, List, Cell } from 'vant'
     [Cell.name]: Cell,
   },
 })
-export default class Home extends Vue {
+export default class Application extends Vue {
   private showPopover = false
   private searchVal = ''
+  public historyBack = (): void => history.back()
   private list = [
     { name: 'Ue4', time: '上午10:20', desc: '滚滚滚' },
     { name: 'Ue5', time: '上午10:21', desc: '滚滚滚' },
